@@ -11,6 +11,26 @@
 
     $currentAdmin = $admin->getAdmin();
 
+    $query = $db->prepare("SELECT * FROM users");
+    $query->execute();
+    $data = $query->fetchAll();
+
+    if(isset($_POST['send'])){
+      $firstname = $_POST['firstname'];
+      $lastname = $_POST['lastname'];
+      $email = $_POST['email'];
+      $password = $_POST['password'];
+      $gender = $_POST['gender'];
+      $phone = $_POST['phone'];
+
+      if($user->register($firstname, $lastname, $email, $password, $gender, $phone)){
+          // Jika berhasil set variable success ke true
+          $success = true;
+      }else{
+          // Jika gagal, ambil pesan error
+          $error = $user->getLastError();
+      }
+    }
  ?>
 
 <!DOCTYPE HTML>
@@ -151,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="index.php"><i class="fa fa-dashboard fa-fw nav_icon"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="management-user.php"><i class="fa fa-users fa-fw nav_icon"></i>User Management</a>
+                            <a href="management/user.php"><i class="fa fa-users fa-fw nav_icon"></i>User Management</a>
                         </li>
 
                             </ul>
@@ -163,7 +183,76 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
+          <h3>&nbsp;&nbsp;Enter Data</h3>
+          <form class="form-horizontal" method="post">
+            <div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">First Name</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" name="firstname" placeholder="First Name">
+									</div>
+            </div>
+            <div class="form-group">
+                  <label for="focusedinput" class="col-sm-2 control-label">Last Name</label>
+                  <div class="col-sm-8">
+										<input type="text" class="form-control1" name="lastname" placeholder="Last Name">
+									</div>
+            </div>
+            <div class="form-group">
+                  <label for="focusedinput" class="col-sm-2 control-label">Email</label>
+                  <div class="col-sm-8">
+										<input type="email" class="form-control1" name="email" placeholder="Email">
+									</div>
+            </div>
+            <div class="form-group">
+									<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control1" name="password" placeholder="Password">
+									</div>
+						</div>
+            <div class="form-group">
+									<label for="checkbox" class="col-sm-2 control-label">Gender</label>
+									<div class="col-sm-8">
+										<div class="checkbox-inline"><label><input type="checkbox" name="gender" value="m">Male</label></div>
+										<div class="checkbox-inline"><label><input type="checkbox" name="gender" value="f">Female</label></div>
+                  </div>
+          </div>
+          <div class="form-group">
+                <label for="phoneNumber" class="col-sm-2 control-label">Phone Number</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control1" name="phone" placeholder="Phone Number">
+                </div>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber" class="col-sm-2 control-label"></label>
+            <div class="col-sm-2">
+              <input type="submit" class="form-control1" name="send">
+            </div>
+          </div>
+          </form>
 
+          <table class="table">
+            <tr>
+            <thead>
+              <th class="active">ID</th>
+              <th class="active">First Name</th>
+              <th class="active">Last Name</th>
+              <th class="active">Email</th>
+              <th class="active">Gender</th>
+              <th class="active">Phone Number</th>
+            </thead>
+            </tr>
+
+            <?php foreach($data as $value): ?>
+            <tr>
+              <td><?php echo $value['id_user'];?></td>
+              <td><?php echo $value['firstname'];?></td>
+              <td><?php echo $value['lastname'];?></td>
+              <td><?php echo $value['email'];?></td>
+              <td><?php echo $value['gender'];?></td>
+              <td><?php echo $value['phone'];?></td>
+            </tr>
+          <?php endforeach; ?>
+          </table>
       <!-- /#page-wrapper -->
    </div>
     <!-- /#wrapper -->

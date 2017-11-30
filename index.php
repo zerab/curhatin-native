@@ -29,15 +29,21 @@
             <div id="leftSidenav" class="sidenav">
               <div class="leftsideContent">
                 <div class="profileBubble">
-                  <center><img src="images/7cf.jpg" class="photo-round"></center>
+                  <center><img src="images/7cf.jpg" class="photo-round"><br>
+                          <span style="font-weight:bold;text-transform:capitalize;"><?php echo $currentUser['firstname']." ".$currentUser['lastname']; ?></span><br>
+                          <span style="text-decoration:italic;font-size:15px;"><i>Honorable Member</i></span><br>
+                  </center>
                 </div>
-
+                <div id="userStats">
+                    <a><i class="fa fa-star fa-2x"></i></a>
+                    <a><i class="fa fa-star fa-2x"></i></a>
+                    <a><span style="font-weight:bold;font-size:17px;color:">5.0</span><br><i class="fa fa-star fa-2x"></i></a>
+                </div>
                 <div class="sideMenu">
 
-                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-home fa-1x"></i>&nbsp;&nbsp;&nbsp;Home</a>
-                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-user fa-1x"></i>&nbsp;&nbsp;&nbsp;My Account</a>
-                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-home fa-1x"></i>&nbsp;&nbsp;&nbsp;Match Up</a>
-
+                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-home fa-1x"></i></a>
+                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-user fa-1x"></i></a>
+                    <a style="cursor:pointer;" onclick="javascript: sendRequest('home.php', '', 'content', 'div', '');"><i class="fa fa-handshake-o fa-1x"></i></a>
                 </div>
 
               <a href="logout.php"><button type="button">Logout</button></a>
